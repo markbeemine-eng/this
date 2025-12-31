@@ -36,6 +36,8 @@
             border-radius: 50%;
             /* Removed: border: 5px solid #FFD700; */
             margin: 10px;
+            transform: scale(1); /* Initial scale */
+            transition: transform 0.3s ease; /* Smooth scaling */
         }
         .character-container {
             display: flex;
@@ -58,7 +60,8 @@
             cursor: pointer;
             background-color: #FFD700; /* Gold */
             color: #FFF;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s ease; /* Added transform transition */
+            transform: scale(1); /* Initial scale */
         }
         button:hover {
             background-color: #FFA500; /* Darker yellow on hover */
@@ -86,7 +89,7 @@
     
     <!-- First Page -->
     <div id="page1" class="page">
-        <img src="https://raw.githubusercontent.com/markbeemine-eng/trial/main/nailong-1.png" alt="Nailong Character" class="character">
+        <img id="characterImg" src="https://raw.githubusercontent.com/markbeemine-eng/trial/main/nailong-1.png" alt="Nailong Character" class="character">
         <h1>pak udik terkejut minta tolong, lihat hiu makan pepes, kak derick imut kayak nailong, will you be my kajapez??</h1>
         <button id="yesButton">GASKAANNN!!!!</button>
         <button id="noButton">malazzz</button>
@@ -106,9 +109,12 @@
         const page2 = document.getElementById('page2');
         const yesButton = document.getElementById('yesButton');
         const noButton = document.getElementById('noButton');
+        const characterImg = document.getElementById('characterImg');
         const canvas = document.getElementById('confettiCanvas');
 
-        // Function to move the "gak dulu" button randomly
+        let scaleFactor = 1; // Initial scale factor
+
+        // Function to move the "malazzz" button randomly
         function moveNoButton() {
             const maxX = window.innerWidth - noButton.offsetWidth;
             const maxY = window.innerHeight - noButton.offsetHeight;
@@ -118,11 +124,21 @@
             noButton.style.top = randomY + 'px';
         }
 
-        // Event listeners for the "gak dulu" button
-        noButton.addEventListener('mouseover', moveNoButton);
+        // Function to scale up the character image and yes button
+        function scaleUpElements() {
+            scaleFactor *= 1.1; // Increase scale by 10% each time
+            characterImg.style.transform = `scale(${scaleFactor})`;
+            yesButton.style.transform = `scale(${scaleFactor})`;
+        }
+
+        // Event listeners for the "malazzz" button
+        noButton.addEventListener('mouseover', () => {
+            moveNoButton();
+            scaleUpElements(); // Scale up on hover
+        });
         noButton.addEventListener('click', moveNoButton);
 
-        // Event listener for the "gas kannn" button
+        // Event listener for the "GASKAANNN!!!!" button
         yesButton.addEventListener('click', () => {
             page1.classList.add('hidden');
             page2.classList.remove('hidden');
