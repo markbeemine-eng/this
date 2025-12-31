@@ -22,15 +22,13 @@
             overflow: hidden;
         }
         .page {
-   .page { text-align: center; 
-          padding: 20px; 
-          border-radius: 15px; 
-          background-color: #FFFFE0; /* Pale yellow */ 
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          max-width: 400px; 
-          width: 90%;
-}
-
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #FFFFE0; /* Pale yellow */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
         }
         .character {
             width: 150px;
@@ -38,7 +36,6 @@
             border-radius: 50%;
             /* Removed: border: 5px solid #FFD700; */
             margin: 10px;
-            transition: transform 0.3s ease; /* Smooth scaling */
         }
         .character-container {
             display: flex;
@@ -61,7 +58,7 @@
             cursor: pointer;
             background-color: #FFD700; /* Gold */
             color: #FFF;
-            transition: background-color 0.3s, transform 0.3s ease; /* Smooth scaling and hover */
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #FFA500; /* Darker yellow on hover */
@@ -89,13 +86,10 @@
     
     <!-- First Page -->
     <div id="page1" class="page">
-        <img src="https://raw.githubusercontent.com/markbeemine-eng/trial/main/nailong-1.png" alt="Nailong Character" class="character" id="nailongImage">
-        <h1>pak udik terkejut minta tolong
-            lihat hiu makan pepes
-            kak derick imut kayak nailong
-            will you be my kajapez??</h1>
+        <img src="https://raw.githubusercontent.com/markbeemine-eng/trial/main/nailong-1.png" alt="Nailong Character" class="character">
+        <h1>pak udik terkejut minta tolong, lihat hiu makan pepes, kak derick imut kayak nailong, will you be my kajapez??</h1>
         <button id="yesButton">GASKAANNN!!!!</button>
-        <button id="noButton">malassss</button>
+        <button id="noButton">malazzz</button>
     </div>
     
     <!-- Second Page -->
@@ -112,14 +106,7 @@
         const page2 = document.getElementById('page2');
         const yesButton = document.getElementById('yesButton');
         const noButton = document.getElementById('noButton');
-        const nailongImage = document.getElementById('nailongImage');
         const canvas = document.getElementById('confettiCanvas');
-
-        // Track scales for growth effect
-        let imageScale = 1;
-        let buttonScale = 1;
-        const maxScale = 3;
-        const growthIncrement = 0.1;
 
         // Function to move the "gak dulu" button randomly
         function moveNoButton() {
@@ -131,27 +118,9 @@
             noButton.style.top = randomY + 'px';
         }
 
-        // Function to grow the image and button
-        function growElements() {
-            if (imageScale < maxScale) {
-                imageScale += growthIncrement;
-                nailongImage.style.transform = `scale(${imageScale})`;
-            }
-            if (buttonScale < maxScale) {
-                buttonScale += growthIncrement;
-                yesButton.style.transform = `scale(${buttonScale})`;
-            }
-        }
-
         // Event listeners for the "gak dulu" button
-        noButton.addEventListener('mouseover', () => {
-            growElements(); // Grow on hover
-            moveNoButton(); // Then move the button
-        });
-        noButton.addEventListener('click', () => {
-            growElements(); // Grow on click
-            moveNoButton(); // Then move the button
-        });
+        noButton.addEventListener('mouseover', moveNoButton);
+        noButton.addEventListener('click', moveNoButton);
 
         // Event listener for the "gas kannn" button
         yesButton.addEventListener('click', () => {
@@ -167,7 +136,4 @@
         });
     </script>
 </body>
-
 </html>
-
-
